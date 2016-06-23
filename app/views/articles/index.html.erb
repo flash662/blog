@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>標題</th>
+      <th>內文</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+    <tr>
+      <td><%= article.title %></td>
+      <td><%= article.content %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

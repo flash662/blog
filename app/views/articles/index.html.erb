@@ -12,6 +12,7 @@
     <tr>
       <th>標題</th>
       <th>內文</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +20,7 @@
     <tr>
       <td><%= article.title %></td>
       <td><%= article.content %></td>
+      <td><%= link_to '編輯', edit_article_path(article), class: 'btn btn-primary' %></td>
     </tr>
     <% end %>
   </tbody>

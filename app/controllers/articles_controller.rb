@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
 
+  before_action :set_article, only: [:edit, :update]
+
   def index
     @articles = Article.all
   end
@@ -15,7 +17,7 @@ class ArticlesController < ApplicationController
       @article = Article.new article_params
       @article.save!
 
-      flash[:success] = '儲存成功'
+      flash[:success] = t('save.success')
       redirect_to action: :index
 
     rescue Exception => e
@@ -26,10 +28,22 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
+
   end
 
   def update
+
+    begin
+
+      @article.update! article_params
+
+      flash[:success] = t('save.success')
+      redirect_to action: :index
+
+    rescue Exception => e
+      flash.now[:alert] = e.message
+      render :edit
+    end
 
   end
 
@@ -38,6 +52,10 @@ class ArticlesController < ApplicationController
   end
 
   private
+
+  def set_article
+    @article = Article.find(params[:id])
+  end
 
   def article_params
     params.require(:article).permit(:title, :content)
